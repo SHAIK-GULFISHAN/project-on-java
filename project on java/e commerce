@@ -1,0 +1,141 @@
+import java.util.*;
+
+public class ECommerceStore {
+
+    static Scanner sc = new Scanner(System.in);
+    static ArrayList<User> users = new ArrayList<>();
+    static ArrayList<String> cart = new ArrayList<>();
+
+    public static void main(String[] args) {
+        int choice;
+        do {
+            System.out.println("\n===== E-COMMERCE STOREFRONT =====");
+            System.out.println("1. Register");
+            System.out.println("2. Login");
+            System.out.println("3. Exit");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    register();
+                    break;
+                case 2:
+                    login();
+                    break;
+                case 3:
+                    System.out.println("Thank you for using E-Commerce Store!");
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
+        } while (choice != 3);
+    }
+
+    static void register() {
+        sc.nextLine();
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter Email: ");
+        String email = sc.nextLine();
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
+
+        users.add(new User(name, email, password));
+        System.out.println("Registration Successful!");
+    }
+
+    // ✅ FIXED: made static
+    static class User {
+        String name;
+        String email;
+        String password;
+
+        User(String name, String email, String password) {
+            this.name = name;
+            this.email = email;
+            this.password = password;
+        }
+    }
+
+    static void login() {
+        sc.nextLine();
+        System.out.print("Enter Email: ");
+        String email = sc.nextLine();
+        System.out.print("Enter Password: ");
+        String password = sc.nextLine();
+
+        for (User u : users) {
+            if (u.email.equals(email) && u.password.equals(password)) {
+                System.out.println("Login Successful! Welcome " + u.name);
+                storeMenu();
+                return;
+            }
+        }
+        System.out.println("Invalid Login Credentials");
+    }
+
+    static void storeMenu() {
+        int choice;
+        do {
+            System.out.println("\n--- STORE MENU ---");
+            System.out.println("1. View Products");
+            System.out.println("2. View Cart");
+            System.out.println("3. Logout");
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    viewProducts();
+                    break;
+                case 2:
+                    viewCart();
+                    break;
+                case 3:
+                    System.out.println("Logged out successfully!");
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
+        } while (choice != 3);
+    }
+
+    static void viewProducts() {
+        System.out.println("\nAvailable Products:");
+        System.out.println("1. Laptop - ₹50000");
+        System.out.println("2. Mobile - ₹20000");
+        System.out.println("3. Headphones - ₹2000");
+        System.out.print("Select product to add to cart (0 to cancel): ");
+        int choice = sc.nextInt();
+
+        switch (choice) {
+            case 1:
+                cart.add("Laptop");
+                break;
+            case 2:
+                cart.add("Mobile");
+                break;
+            case 3:
+                cart.add("Headphones");
+                break;
+            case 0:
+                return;
+            default:
+                System.out.println("Invalid product");
+                return;
+        }
+        System.out.println("Product added to cart!");
+    }
+
+    static void viewCart() {
+        System.out.println("\nYour Cart:");
+        if (cart.isEmpty()) {
+            System.out.println("Cart is empty");
+        } else {
+            for (String item : cart) {
+                System.out.println("- " + item);
+            }
+        }
+    }
+}
