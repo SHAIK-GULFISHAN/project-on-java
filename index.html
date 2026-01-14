@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>E-Commerce Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="box" id="loginBox">
+    <h2>Login</h2>
+    <input type="text" id="loginUser" placeholder="Username">
+    <input type="password" id="loginPass" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <p>
+        New user?
+        <a href="#" onclick="showRegister()">Register</a>
+    </p>
+</div>
+
+<!-- REGISTER -->
+<div class="box" id="registerBox" style="display:none;">
+    <h2>Register</h2>
+    <input type="text" id="regUser" placeholder="Username">
+    <input type="password" id="regPass" placeholder="Password">
+    <button onclick="register()">Register</button>
+    <p>
+        Already registered?
+        <a href="#" onclick="showLogin()">Login</a>
+    </p>
+</div>
+
+<!-- PRODUCTS -->
+<div class="box" id="productBox" style="display:none;">
+    <h2>Products</h2>
+
+    <p>Laptop - ₹50000 <button onclick="addToCart(50000)">Add</button></p>
+    <p>Mobile - ₹20000 <button onclick="addToCart(20000)">Add</button></p>
+    <p>Headphones - ₹2000 <button onclick="addToCart(2000)">Add</button></p>
+
+    <h3>Cart Total: ₹<span id="total">0</span></h3>
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
